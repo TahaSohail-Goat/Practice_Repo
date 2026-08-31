@@ -138,7 +138,7 @@ git push -u origin <your-branch-name>
 ```
 Then on GitHub: **Compare & pull request** → real title + 1-line description → **Create pull request**.
 
-**[SHAHEER]** Open my PR → **Files changed** → read the actual diff → leave at least one real comment → **Approve**.
+**[SHAHEER]** Open Taha's PR → **Files changed** → read the actual diff → leave at least one real comment → **Approve**.
 
 **[TAHA]** Once approved: **Merge pull request** → Confirm → **Delete branch**.
 
@@ -158,11 +158,11 @@ Open the conflicted file in VS Code and take **Screenshot 1** of the conflict ma
 PR #1 is Merged; PR #2 is blocked with a visible conflict in the peer's editor.
 
 **Observation D:**
-- **(a)** The `.js` change merged cleanly because Person 1 and Person 2 touched **different lines** of `script.js`; the `<h1>`/button lines conflicted because **both people edited the exact same lines** in the same file. The general rule: Git auto-merges when changes touch different lines (or different files) — it only stops and asks a human when both sides modify the *same* line(s) since the last common ancestor commit.
-- **(b)** In the marker block, the section between `<<<<<<< HEAD` and `=======` is **your peer's current branch/main content** (what's already there), and the section between `=======` and `>>>>>>> <branch-name>` is the **incoming change** being merged in — the label after `>>>>>>>` names exactly which branch it came from.
+- **(a)** The `.js` change merged cleanly because Taha and Shaheer touched **different lines** of `script.js`; the `<h1>`/button lines conflicted because **both people edited the exact same lines** in the same file. The general rule: Git auto-merges when changes touch different lines (or different files) — it only stops and asks a human when both sides modify the *same* line(s) since the last common ancestor commit.
+- **(b)** In the marker block, the section between `<<<<<<< HEAD` and `=======` is **Shaheer's current branch/main content** (what's already there), and the section between `=======` and `>>>>>>> <branch-name>` is the **incoming change** being merged in — the label after `>>>>>>>` names exactly which branch it came from.
 - **(c)** No work was lost — GitHub simply refuses to auto-merge and pauses the PR. Both versions of the conflicting lines are preserved inside the markers until a human chooses (or combines) one.
 
-**Explore D-1:** Yes — technically Person 2 could review the diff even if Person 1 had pushed straight to `main`, by looking at the commit history. But without a PR the team loses: a dedicated review step *before* the change lands, inline commenting on specific lines, a required-approval gate, and a clean record of *who approved what and why* — a PR turns "I looked at it after the fact" into "nothing merges until someone signs off."
+**Explore D-1:** Yes — technically Shaheer could review the diff even if Taha had pushed straight to `main`, by looking at the commit history. But without a PR the team loses: a dedicated review step *before* the change lands, inline commenting on specific lines, a required-approval gate, and a clean record of *who approved what and why* — a PR turns "I looked at it after the fact" into "nothing merges until someone signs off."
 
 **Explore D-2:** Predictions before trying, then the actual result:
 | Option | Predicted result |
@@ -202,14 +202,14 @@ Open `index.html` in a browser and click the button — confirm `main` actually 
 ### Checkpoint E ✅
 Both laptops show the identical agreed version; the app runs.
 
-**Observation E:** The commit made in E3 is a **merge-resolution commit** — unlike a normal commit, it records how a conflict between two people's work was deliberately settled, and it typically has **two parent commits** (one from each branch) instead of one. The decision carries whoever ran `git commit` on the resolution — here, Person 2 — but the *content* of the decision belongs to both, since it was agreed on together in the E1 conversation.
+**Observation E:** The commit made in E3 is a **merge-resolution commit** — unlike a normal commit, it records how a conflict between two people's work was deliberately settled, and it typically has **two parent commits** (one from each branch) instead of one. The commit is authored by whoever ran `git commit` on the resolution — here, Shaheer — but the *content* of the decision belongs to both, since it was agreed on together in the E1 conversation.
 
 **Explore E-1:** `git log --oneline --graph --all` shows the history as a graph. Roughly:
 ```
 *   merge commit (main) — conflict resolved
 |\
-| * peer's branch commit (heading/button rewrite + .gitignore)
-* | your branch commit (heading/button rewrite + script.js change) — already merged via PR #1
+| * Shaheer's branch commit (heading/button rewrite + .gitignore)
+* | Taha's branch commit (heading/button rewrite + script.js change) — already merged via PR #1
 |/
 * earlier shared commit on main
 ```
